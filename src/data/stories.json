@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "user": "user1",
+    "avatar": "https://picsum.photos/100/100",
+    "image": "/src/assets/imag1.jpg",
+    "seen": false
+  },
+  {
+    "id": 2,
+    "user": "user2",
+    "avatar": "https://picsum.photos/101/101",
+    "image": "/src/assets/image2.jpg",
+    "seen": false
+  },
+  {
+    "id": 3,
+    "user": "user3",
+    "avatar": "https://picsum.photos/102/102",
+    "image": "/src/assets/image3.jpg",
+    "seen": false
+  },
+  {
+    "id": 4,
+    "user": "user4",
+    "avatar": "https://picsum.photos/103/103",
+    "image": "/src/assets/image4.jpg",
+    "seen": false
+  },
+  {
+    "id": 5,
+    "user": "user5",
+    "avatar": "https://picsum.photos/104/104",
+    "image": "/src/assets/image5.jpg",
+    "seen": false
+  },
+  {
+    "id": 6,
+    "user": "user6",
+    "avatar": "https://picsum.photos/105/105",
+    "image": "/src/assets/image6.jpg",
+    "seen": false
+  },
+  {
+    "id": 7,
+    "user": "user7",
+    "avatar": "https://picsum.photos/106/106",
+    "image": "/src/assets/image7.jpg",
+    "seen": false
+  },
+  {
+    "id": 8,
+    "user": "user8",
+    "avatar": "https://picsum.photos/107/107",
+    "image": "/src/assets/image3.jpg",
+    "seen": false
+  },
+  {
+    "id": 9,
+    "user": "user9",
+    "avatar": "https://picsum.photos/108/108",
+    "image": "/src/assets/image4.jpg",
+    "seen": false
+  }
+]
