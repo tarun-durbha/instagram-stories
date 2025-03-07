@@ -6,9 +6,3 @@ export interface Story {
     image: string;
     seen: boolean;
   }
-  
-  
-  interface StoryListProps {
-    stories: Story[];
-    onStoryClick: (index: number) => void;
-  }

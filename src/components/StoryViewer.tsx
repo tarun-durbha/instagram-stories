@@ -10,7 +10,6 @@ const StoryViewer = ({ stories, initialIndex, onClose }: {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [progress, setProgress] = useState(0);
   const [loaded, setLoaded] = useState(false);
-  const timerRef = useRef<number>();
   const imageRef = useRef<HTMLImageElement>(null);
 
   const handleNext = useCallback(() => {
@@ -23,29 +22,33 @@ const StoryViewer = ({ stories, initialIndex, onClose }: {
     setProgress(0);
   }, [stories.length]);
 
-
-useEffect(() => {
-  const timer = setInterval(() => {
-    if (loaded && progress < 100) {
-      setProgress(p => p + 1);
-    } else if (progress >= 100) {
-      handleNext();
-    }
-  }, 50); 
-
-  return () => clearInterval(timer);
-}, [loaded, handleNext ,progress]);
-
-
-useEffect(() => {
-  const preloadImages = () => {
-    stories.forEach(story => {
-      const img = new Image();
-      img.src = story.image;
-    });
+  const handleProgressBarClick = (index: number) => {
+    setCurrentIndex(index);
+    setProgress(0);
+    setLoaded(false);
   };
-  preloadImages();
-}, [stories]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (loaded && progress < 100) {
+        setProgress(p => p + 1);
+      } else if (progress >= 100) {
+        handleNext();
+      }
+    }, 50);
+
+    return () => clearInterval(timer);
+  }, [loaded, handleNext, progress]);
+
+  useEffect(() => {
+    const preloadImages = () => {
+      stories.forEach(story => {
+        const img = new Image();
+        img.src = story.image;
+      });
+    };
+    preloadImages();
+  }, [stories]);
 
   const handleImageLoad = () => {
     setLoaded(true);
@@ -55,11 +58,17 @@ useEffect(() => {
   };
 
   return (
-    <div className="story-viewer">
+    <div 
+      className="story-viewer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Story viewer"
+    >
       <ProgressBars 
         stories={stories} 
         currentIndex={currentIndex}
         progress={progress}
+        onProgressBarClick={handleProgressBarClick}
       />
       
       <img
@@ -69,14 +78,32 @@ useEffect(() => {
         className="story-image"
         onLoad={handleImageLoad}
         style={{ opacity: 0, transition: 'opacity 0.3s' }}
+        loading="lazy"
+        referrerPolicy="no-referrer"
       />
 
       <div className="navigation-controls">
-        <div className="control left" onClick={handlePrev} />
-        <div className="control right" onClick={handleNext} />
+        <div 
+          className="control left" 
+          onClick={handlePrev}
+          role="button"
+          aria-label="Previous story"
+          tabIndex={0}
+        />
+        <div 
+          className="control right" 
+          onClick={handleNext}
+          role="button"
+          aria-label="Next story"
+          tabIndex={0}
+        />
       </div>
 
-      <button className="close-button" onClick={onClose}>
+      <button 
+        className="close-button" 
+        onClick={onClose}
+        aria-label="Close story viewer"
+      >
         ×
       </button>
     </div>

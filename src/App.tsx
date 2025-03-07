@@ -22,7 +22,7 @@ const App = () => {
   useEffect(() => {
     const fetchStories = async () => {
       try {
-        const response = await fetch('/src/data/stories.json');
+        const response = await fetch('/data/stories.json', { referrerPolicy: 'no-referrer' });
         const data = await response.json();
         console.log('data', data);
         setStories(data);
@@ -45,14 +45,14 @@ const App = () => {
 
   if (loading)
     return (
-      <div className="loader-container">
-        <div className="instagram-loader"></div>
+      <div className="loader-container" data-testid="loader">
+        <div className="instagram-loader" aria-label="Loading stories"></div>
       </div>
     );
 
   if (!isMobile) {
     return (
-      <div className="desktop-warning">
+      <div className="desktop-warning" role="alert">
         <p>
           This app is optimized for mobile view only. Please resize your browser
           window or view on a mobile device.
@@ -63,19 +63,22 @@ const App = () => {
 
   return (
     <>
-     <Header />
-     <div className="app">
-      <StoryList stories={stories} onStoryClick={handleStoryOpen} />
-      {activeIndex !== null && (
-        <StoryViewer
-          stories={stories}
-          initialIndex={activeIndex}
-          onClose={() => setActiveIndex(null)}
-        />
-      )}
-    </div>
+      <Header />
+      <main className="app" role="main" data-testid="app">
+        <section aria-label="Story list">
+          <StoryList stories={stories} onStoryClick={handleStoryOpen} />
+        </section>
+        {activeIndex !== null && (
+          <section aria-label="Story viewer">
+            <StoryViewer
+              stories={stories}
+              initialIndex={activeIndex}
+              onClose={() => setActiveIndex(null)}
+            />
+          </section>
+        )}
+      </main>
     </>
-    
   );
 };
 

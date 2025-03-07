@@ -4,6 +4,7 @@ import Story from './Story';
 interface Story {
   id: number;
   image: string;
+  user: string;
 }
 
 interface StoryListProps {
@@ -13,17 +14,19 @@ interface StoryListProps {
 
 const StoryList: React.FC<StoryListProps> = ({ stories, onStoryClick }) => {
   return (
-    <div className="story-list">
+    <ul className="story-list" role="list">
       {stories.map((story, index) => (
-        <div
-          key={story.id}
-          onClick={() => onStoryClick(index)}
-          className="story-thumbnail"
-        >
-          <Story story={story} />
-        </div>
+        <li key={story.id} className='story-item'>
+          <button
+            onClick={() => onStoryClick(index)}
+            className="story-thumbnail"
+            aria-label={`View story by ${story.user}`}
+          >
+            <Story story={story} />
+          </button>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

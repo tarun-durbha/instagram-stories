@@ -16,9 +16,21 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="header">
-      <div className="header-time">{currentTime}</div>
-      <div className="header-logo">Instagram</div>
+    <header className="header" role="banner" aria-label="Application Header">
+      <div 
+        className="header-time" 
+        aria-live="polite" 
+        data-current-time={currentTime}
+      >
+        {currentTime}
+      </div>
+      <div 
+        className="header-logo" 
+        aria-label="Instagram Logo" 
+        data-testid="header-logo"
+      >
+        Instagram
+      </div>
     </header>
   );
 };

@@ -32,7 +32,7 @@ describe('Instagram Stories App', () => {
           cy.get('.story-image')
             .invoke('attr', 'src')
             .should('not.equal', initialSrc)
-            .then((newSrc) => {
+            .then(() => {
               cy.get('.control.left').click();
               cy.get('.story-image')
                 .invoke('attr', 'src')
