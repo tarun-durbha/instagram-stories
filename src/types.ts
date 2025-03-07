@@ -5,4 +5,5 @@ export interface Story {
     avatar: string;
     image: string;
     seen: boolean;
+    mediaType:string;
   }
